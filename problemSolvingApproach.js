@@ -34,12 +34,12 @@
 // ============================================================================
 //write a function which takes in a string and returns counts of each character in the string
 // simple
-charCount("aaaa"); // {a:4}
+// charCount("aaaa"); // {a:4}
 charCount("hello"); // {h:1, e:1, etc}
 // complex
-charCount("my phone number is 5555555");
+// charCount("my phone number is 5555555");
 // Empty (not that important in interviews, but is in real world so it's fool proof)
-charCount("");
+// charCount("");
 // invalid
 
 // 3 BREAK IT DOWN ------------------------------------------------------------------
@@ -50,7 +50,37 @@ charCount("");
 
 // ============================================================================
 //write a function which takes in a string and returns counts of each character in the string
-function charCount(str) {
+// function charCount(str) {
   //do something
   // return an object with keys that are lowercase alphanumeric characters in the string; values should be the count for those characters
+// }
+
+// function charCount(str){
+  //make object to return at end
+  // loop over string, for each character...
+    // if char is number/letter AND is a key in object, add one to count
+    // if char is num/letter AND not in object, add it to object and set value to 1
+    // if char is comething lese (space, period, etc.) don't do anything
+  // return object at end
+// }
+
+// SOLVE / SIMPLIFY------------------------------------------------------------------
+function charCount(str){
+  //make object to return at end
+  var result = {};
+  // loop over string, for each character...
+  for(var i=0; i<str.length; i++){
+    var char = str[i]
+    // if char is number/letter AND is a key in object, add one to count
+    if(result[char] > 0) {
+      result[char]++;
+    }
+    // if char is num/letter AND not in object, add it to object and set value to 1
+    else {
+      result[char] = 1;
+    };
+  }
+    // if char is comething lese (space, period, etc.) don't do anything
+  // return object at end
+  return  result;
 }
