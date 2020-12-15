@@ -84,3 +84,4 @@ function charCount(str){
   // return object at end
   return  result;
 }
+consoloe.log(charCount("hello"));
