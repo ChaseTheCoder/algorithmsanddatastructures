@@ -86,3 +86,22 @@ function charCount(str){
 }
 consoloe.log(charCount("hello"));
 
+// 4 LOOK BACK & REFACTOR
+// ------------------------------------------------------------------
+// can you check the result?
+// can you derive the result differently?
+// can yo understand at a glance?
+// can you use the result or method for some other problem?
+// can you improve the performance?
+// can you think of other ways to refactor?
+// how have ohter people solved this problem?n
+
+function charCount1(str) {
+  var obj = {};
+  for (var char of str) {
+    char = char.toLowerCase();
+    if (isAlphaNumeric.test(char)) {
+      obj[char] = ++obj[char] || 1;
+    }
+  }
+}
