@@ -36,4 +36,31 @@ sumZero([-4,-3,-2,-1,0,5,10])
 //countUniqueValues
 // implement a function called countUniqueValues, which accepts a sorted array, and counts the unique values in the array. ther can be negative numbers in the array, ubt it will always be sorted.
 
-// GOOD
+// MY SOLUTION =========================================
+function countUniqueValues(arr){
+  const valueCount = {};
+  for (let i = 0; i < arr.length; i++){
+      let num = arr[i];
+      valueCount[num] ? valueCount[num] += 1 : valueCount[num] = 1;
+  }
+  console.log(valueCount)  //returns key of unique value with value of number of times in arr
+  const uniqueValues = Object.keys(valueCount);  //Object.keys returns array of only keys.
+  console.log(uniqueValues)
+  return uniqueValues.length;  // returns number of unique values i.e. keys
+  // return uniqueValues.length;
+}
+
+countUniqueValues([1,1,1,2,3])
+
+// COLT STEELE =========================================
+function countUniqueValues1(arr){
+  if(arr.length == 0) return 0;
+  var i = 0;
+  for(var j = 1; j < arr.length; j++){ //j set to one ahead of i
+    if(arr[i] !== arr[j]){  // if i does not equal j
+      i++;                  // then move i up
+      arr[i] = arr[j]      // and reset value equal to that of j
+    }                      // until j gets to end of array
+  }
+  return i + 1;
+}
