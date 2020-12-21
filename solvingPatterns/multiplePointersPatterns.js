@@ -1,4 +1,6 @@
 // Multiple Pointers Patterns
+// Creating POINTERS/values that correspond to an index of position and move the towards the beginning/middle/end based on certain ocndition.
+// VERY efficient for solving problems with minimal space complexity.
 
 //  function called sumZero which accepts a sorted array of integers. Function should find the first pair where the sum is 0.  Returned an array that includes both values that sum to zero or undefined if a pair does not exist.
 
@@ -52,7 +54,7 @@ function countUniqueValues(arr){
 
 countUniqueValues([1,1,1,2,3])
 
-// COLT STEELE =========================================
+// GOOD =========================================
 function countUniqueValues1(arr){
   if(arr.length == 0) return 0;
   var i = 0;

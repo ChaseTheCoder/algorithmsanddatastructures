@@ -2,9 +2,10 @@
 
 // This pattern involves creating a window which can either be an array or number from one position to another
 // Depending on a certain condition, the window either increases or closes ( and a new window is created)
-// Ver useful for keeping track of a subset of data in an array/string etc.
+// Very useful for keeping track of a subset of data in an array/string etc.
+// ME: subtracts 1st index in sequence and adds in next so you don't have to loop each time
 
-// Write a function called maxXubarraysSum which accepts an array of integers and a number called n.  The function should calculate the maximum sum of n consecutive elements in the array.
+// Write a function called maxSubarraysSum which accepts an array of integers and a number called n.  The function should calculate the maximum sum of n consecutive elements in the array.
 // Do not need to 
 maxSubarraySum([1,2,5,2,8,1,5],2) // set of integers, max sum of this number of integers
 maxSubarraySum([1,2,5,2,8,1,5],4) //17 [2,5,2,8]
@@ -31,18 +32,18 @@ function maxSubarraySum(arr, num){
   return max;
 }
 
-// GOOD SLIDING WINDOW
+// GOOD =========================================
 function maxSubarraySum(arr, num){
   let maxSum = 0;
   let tempSum = 0;
   if (arr.length < num) return null;
-  for (let i = 0; i < num; i++) {
-    maxSum += arr[i];
+  for (let i = 0; i < num; i++) {  // adds first sequence of 'n' together
+    maxSum += arr[i];  //returns as 1st max sum
   }
   tempSum = maxSum;
   for (let i = num; i < arr.length; i++){
-    tempSum = tempSum - arr[i - num] + arr[i];
-    maxSum = Math.max(maxSum, tempSum);
+    tempSum = tempSum - arr[i - num] + arr[i]; //subtracts 1st value in sequence of 'n' and adds next value
+    maxSum = Math.max(maxSum, tempSum);  // if value is larger than previous sequence, make it max sum.
   }
   return maxSum;
 }
