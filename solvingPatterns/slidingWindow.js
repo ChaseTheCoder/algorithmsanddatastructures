@@ -12,19 +12,37 @@ maxSubarraySum([4,2,1,6],1)  //6
 maxSubarraySum([],4) //null
 
 // BAD
+// Especially if you have to loop through 20 numbers and add together
+// Inefficieant if we
 function maxSubarraySum(arr, num){
   if (num > arr.length){
     return null;
   }
-  var max = -Infinity;
+  var max = -Infinity;    // lowest number possible in case array hass all negative
   for (let i = 0; i < arr.length - num + 1; i++){
-    temp = 0;
+    temp = 0;                      // will store sum
     for(let j = 0; j < num; j++){
       temp += arr[i + j];
     }
   }
-  if (temp > max){
-    max = temp;
+  if (temp > max){   // will compare max
+    max = temp;       // will update max if it it largest, first will always be larger than -Infinity
   }
   return max;
+}
+
+// GOOD SLIDING WINDOW
+function maxSubarraySum(arr, num){
+  let maxSum = 0;
+  let tempSum = 0;
+  if (arr.length < num) return null;
+  for (let i = 0; i < num; i++) {
+    maxSum += arr[i];
+  }
+  tempSum = maxSum;
+  for (let i = num; i < arr.length; i++){
+    tempSum = tempSum - arr[i - num] + arr[i];
+    maxSum = Math.max(maxSum, tempSum);
+  }
+  return maxSum;
 }
