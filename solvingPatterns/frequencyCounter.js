@@ -93,8 +93,12 @@ function validAnagram(first, second) {
 
   for (let i = 0; i < second.length; i++) {
     let letter = second[i];
-    lookup[letter] ? lookup[letter] += 1 : lookup[letter] = 1;
+    // can't find letter or letter is zero then it's not an anagram
+    if(!lookup[letter]){
+      return false;
+    } else {
+      lookup[letter] -= 1 ;
+    }
   }
-
   return true
 }
