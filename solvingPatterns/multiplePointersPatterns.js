@@ -23,7 +23,7 @@ function sumZero(arr){
   while(left < right){
     let sum = arr[left] + arr[right];
     if(sum === 0){                      //is it zeor?
-      return [arr[lef], arr[right]];
+      return [arr[left], arr[right]];
     } else if(sum > 0){                 // i.e. if right abs value bigger go down index
       right--;
     } else {                          // else left abs value bigger so go up index
@@ -36,7 +36,7 @@ sumZero([-4,-3,-2,-1,0,5,10])
 
 //==============================================================================
 //countUniqueValues
-// implement a function called countUniqueValues, which accepts a sorted array, and counts the unique values in the array. ther can be negative numbers in the array, ubt it will always be sorted.
+// implement a function called countUniqueValues, which accepts a sorted array, and counts the unique values in the array. there can be negative numbers in the array, but it will always be sorted.
 
 // MY SOLUTION =========================================
 function countUniqueValues(arr){
@@ -54,7 +54,7 @@ function countUniqueValues(arr){
 
 countUniqueValues([1,1,1,2,3])
 
-// GOOD =========================================
+// STELE =========================================
 function countUniqueValues1(arr){
   if(arr.length == 0) return 0;
   var i = 0;
@@ -65,4 +65,54 @@ function countUniqueValues1(arr){
     }                      // until j gets to end of array
   }
   return i + 1;
+}
+
+//==============================================================================
+// averagePair Solution
+function averagePair(arr, num){
+  let start = 0  
+  let end = arr.length-1;
+  while(start < end){
+    let avg = (arr[start]+arr[end]) / 2 
+    if(avg === num) return true;
+    else if(avg < num) start++  // it's storted so no need to find averages of < avg
+    // also if average of end and beginning are too low, need to go up a number
+    else end--  // else move end index down
+  }
+  return false;
+}
+//==============================================================================
+// isSubsequence Solution - Iterative
+// MY SOLUTION
+// function isSubsequence(str1, str2) {
+//   if(str1.length > str2.length) return false;
+//   let characters = 0;
+//   let i = 0;
+//   for(let j = 0; j < str2.length; j++){
+//       if(str1[i] === str2[j]){
+//           characters += 1;
+//           i++;
+//       }
+//   }
+//   return (characters = str1.length) ? true : false;
+// }
+
+//
+function isSubsequence(str1, str2) {
+  var i = 0;
+  var j = 0;
+  if (!str1) return true;
+  while (j < str2.length) {
+    if (str2[j] === str1[i]) i++; // if there is a match, move to next letter
+    if (i === str1.length) return true; // if there is a match for all it's true
+    j++; // else move to next letter
+  }
+  return false; // if it doesn't reach length, it's false
+}
+// isSubsequence Solution - Recursive but not O(1) Space
+function isSubsequence(str1, str2) {
+  if(str1.length === 0) return true
+  if(str2.length === 0) return false
+  if(str2[0] === str1[0]) return isSubsequence(str1.slice(1), str2.slice(1))  
+  return isSubsequence(str1, str2.slice(1))
 }
