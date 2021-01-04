@@ -16,18 +16,23 @@
 // Loop through the array from the start until the end
 //        if the pivot is greater than the current element, increment the pivot index variable and then swap the current element with the element at the pivot index
 
-function pivot(arr, start=0, end=arr.length+1){
+function pivot(arr, start=0, end = arr.length - 1){
+  const swap = (arr, idx1, idx2) => {
+    [arr[idx1],arr[idx2]] = [arr[idx2],arr[idx1]];
+  }
   
-
   let pivot = arr[start];
-  let swapIdx=start;
+  let swapIdx = start;
 
-  for(let i = start + 1; i < arr.length; i ++){
+  for(let i = start + 1; i <= end; i ++){
     if(pivot > arr[i]){
       swapIdx++;
       swap(arr,swapIdx,i)
     }
   }
+  swap(arr, start, swapIdx);
+  console.log(swapIdx);
+  return swapIdx;
 }
 
 function quickSort(arr, left = 0, right = arr.length -1){
@@ -36,10 +41,13 @@ function quickSort(arr, left = 0, right = arr.length -1){
     //left
     quickSort(arr,left,pivotIndex-1)
     //right
-    quickSort(arr,pivotIndex+1, right);
+    quickSort(arr,pivotIndex+1,right);
   }
+  console.log(arr);
   return arr;
 }
+
+quickSort([4,8,2,1,5,7,6,3])
 
 pivot([4,8,2,1,5,7,6,3])
 // [4|,8,|2,1,5,7,6,3]
@@ -56,3 +64,7 @@ pivot([4,8,2,1,5,7,6,3])
 //  2,1        5  9
 //    2    
 //  1
+
+// BIG O:  BestCase: O(log n)   
+// WorstCase: if all is sorted, each decomposition is one item (first, i.e. lowest) results in O(n)
+//      fix by choosing middle element or random

@@ -20,7 +20,7 @@ function swap(arr, idx1, idx2) {
 }
 
 // ES2015 new way, not as readable
-const swap = (arr, idx1, dix2) => {
+const swap = (arr, idx1, idx2) => {
   [arr[idx1],arr[idx2]] = [arr[idx2],arr[idx1]];
 }
 
