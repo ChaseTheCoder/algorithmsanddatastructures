@@ -87,3 +87,32 @@ function mostDigits(nums) {
 // for each iteration of the loop:
     // Create buckets for each digit(0 to 9)
     // place each number in the corresponding bucket based on its k-th digit
+
+function radixSort(nums){
+  let maxDigitCount = mostDigits(nums);
+  console.log(maxDigitCount);
+  for(let k = 0; k < maxDigitCount; k++){
+    let digitBuckets = Array.from({length: 10}, () => []);
+    for(let i = 0; i < nums.length; i++){
+      let digit = getDigit(nums[i],k)
+      digitBuckets[digit].push(nums[i]);
+    }
+    console.log(digitBuckets);
+    nums = [].concat(...digitBuckets); // ...(spread operator)  .concat([[1],[2],[3]]) != [1,2,3];  .concat(...[[1],[2],[3]]) = [1,2,3];
+    console.log(nums);
+  }
+}
+
+radixSort([23,345,5467,12,2345,9852])
+// [[], [], [12, 9852], [23], [], [345, 2345], [], [5467], [], []]
+// [12, 9852, 23, 345, 2345, 5467]
+// [[], [12], [23], [], [345, 2345], [9852], [5467], [], [], []]
+// [12, 23, 345, 2345, 9852, 5467]
+// [[12, 23], [], [], [345, 2345], [5467], [], [], [], [9852], []]
+// [12, 23, 345, 2345, 5467, 9852]
+// [[12, 23, 345], [], [2345], [], [], [5467], [], [], [], [9852]]
+// [12, 23, 345, 2345, 5467, 9852]
+
+// BIG O:  
+// best O(nk)  worst O(nk)  space complexity O(n+k)
+// n - lenght of array    k - number o fdigits(average)
