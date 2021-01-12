@@ -76,6 +76,66 @@ class DoublyLinkedList{
     this.length++;
     return this;
   }
+  get(index){
+    if(index < 0 || index >= this.length) return null; // check if index exists
+    var counter, current;
+    if(index <= this.length/2){
+      console.log("WORKING FROM START");
+      counter = 0;
+      current = this.head;
+      while(counter !== index){
+        current = current.next;
+        counter++;
+      }
+    } else {
+      console.log("WORKING FROM END");
+      counter = this.length - 1;
+      current = this.tail;
+      while(counter !== index){
+        current = current.prev;
+        counter--;
+      }
+    }
+    return current;
+  }
+  set(index, val){ 
+    var foundNode = this.get(index); // 1. find index
+    if (foundNode != null) { // 2. if it does exist
+      foundNode.val = val; // 3. set value
+      return true; // 4. return true
+    }
+    return false; // 5. else, return false
+  }
+  insert(index, val){ 
+    if(index < 0 || index >= this.length) return false; // 1. if index doesn't exist, false
+    if(index === this.length) return this.push(val); // 2. 
+    if(index === 0) return this.unshift(val);
+    var newNode = new Node(val);
+    var beforeNode = this.get(index - 1);
+    var afterNode = beforeNode.next;
+    beforeNode.next = newNode;
+    newNode.prev = beforeNode;
+    newNode.next = afterNode;
+    afterNode.prev = newNode;
+    this.length++;
+    return true;
+  }
+  remove(index){
+    if(index < 0 || index >= this.length) return undefined;
+    if(index === this.length - 1) return this.pop(val);
+    if(index === 0) return this.shift();
+    var removedNode = this.get(index); 
+    var beforeNode = removedNode.prev;
+    var afterNode = removedNode.next;
+    beforeNode.next = afterNode;
+    afterNode.prev = beforeNode;
+    // removedNode.prev.next = removedNode.next;
+    // removedNode.next.prev = removedNode.prev;
+    removedNode.next = null;
+    removedNode.prev = null;
+    this.length--;
+    return removedNode;
+  }
 }
 
 // PUSH ----------------------------------------
@@ -165,3 +225,76 @@ class DoublyLinkedList{
 // Console
 // Assets
 // Comments
+// GET ----------------------------------------
+// working with nodes 1-9 in order
+// list 
+// Object {
+//   head: Object {
+//     next: Object {},
+//     prev: null,
+//     val: 1
+//   },
+//   length: 9,
+//   tail: Object {
+//     next: null,
+//     prev: Object {},
+//     val: 9
+//   }
+// }
+// list.get(7)
+// "WORKING FROM END"
+// Object {
+//   next: Object {
+//     next: null,
+//     prev: [circular bject,
+//     val: 9
+//   },
+//   prev: Object {
+//     next: [circular bject,
+//     prev: Object {},
+//     val: 7
+//   },
+//   val: 8
+// }
+// INSERT ----------------------------------------
+// list
+// Object {
+//   head: Object {
+//     next: Object {},
+//     prev: null,
+//     val: 1
+//   },
+//   length: 9,
+//   tail: Object {
+//     next: null,
+//     prev: Object {},
+//     val: 9
+//   }
+// }
+// list.insert(3, 99)
+// "WORKING FROM START"
+// true
+// Console
+// Assets
+// Comments
+// REMOVE ----------------------------------------
+// Object {
+//   next: Object {
+//     next: Object {},
+//     prev: [circular bject,
+//     val: 5
+//   },
+//   prev: Object {
+//     next: [circular bject,
+//     prev: Object {},
+//     val: 3
+//   },
+//   val: 4
+// }
+// list.remove(3)
+// "WORKING FROM START"
+// Object {
+//   next: null,
+//   prev: null,
+//   val: 4
+// }
