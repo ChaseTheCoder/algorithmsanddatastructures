@@ -7,6 +7,17 @@
 // POP removing a node from the end
 // SHIFT removing a node from the beginning
 // UNSHIFT adding a node to the beginning
+// GET return node information
+// SET replacing the value of a node 
+// INSERT insert node at place other than head or tail
+// REMOVE
+
+// Big O of Doubly Linked Lists
+// Insertion - O(1)
+// Removal - Object(1)
+// Searching - O(n)
+// Access - O(n)
+// Technically searching is O(n/2), but that's still O(n)
 
 class Node{
   constructor(val){
@@ -70,7 +81,7 @@ class DoublyLinkedList{
       this.tail = newNode; // set tail to be the new node
     } else { 
         this.head.prev = newNode; // 3. set prev property on the head of the list to be the new node
-        newNode.next = this.head ; // 4. set next property on the new node to be the head property
+        newNode.next = this.head; // 4. set next property on the new node to be the head property
         this.head = newNode; // 5. update the  head to be the new node
     }
     this.length++;

@@ -899,7 +899,6 @@ class SinglyLinkedList{
       node = next; // 9. set the node variable to be the value of the next variable
     }
     return this;
-    
   }
   print(){
     var arr = [];
