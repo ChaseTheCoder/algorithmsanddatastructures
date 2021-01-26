@@ -19,13 +19,14 @@
 // and restoring the properties is called down-heap... 
 // AKA bublle-down, percolate-down, sift-down, tricle down, heapify-down, cascade-down, extract-min/max
 
-class Node {
-  constructor(value){
-    this.value = value;
-    this.left = null;
-    this.right = null;
-  }
-}
+// PRIORITY QUEUE
+// data structre where each element has a priority.
+// elements with higher priorities are served before elements with lower priorities
+
+// BIG O
+// Insertion - O(log N)  excels at insertion & removal
+// Removal - O(log N)
+// Search - O(N)        not so good at search
 
 class MaxBinaryHeap {
   constructor(){
@@ -107,3 +108,93 @@ heap.insert(55);
 // Object {
 //   values: [39, 33, 41, 18, 27, 12]
 // }
+
+//PRIORITY QUEUE-----------------------------------------------------------------
+// i.e. MinBinaryHeap
+
+class Node {
+  constructor(value, priority){
+    this.value = value;
+    this.priority = priority;
+  }
+}
+
+class PriorityQueue {
+  constructor(){
+    this.priority = [];
+  }
+  enqueue(val, priority){
+    let newNode = new Node(val, priority);
+    this.priority.push(newNode);
+    this.bubbleUp();
+  }
+  bubbleUp(){
+    let idx = this.values.length - 1; //create variable that stores the index of last value
+    const element = this.values[idx]; // create variable that stores the object of last value
+    while(idx > 0){
+      let parentIdx = Math.floor((idx - 1)/2) // parent index of newly added value: index (n-1) / 2 (floored)
+      let parent = this.values[parentIdx]; // save value of parent index
+      if(element.priority >= parent.priority) break; // if priority is less than parent, break and be done
+      this.values[parentIdx] = element; // else save parent index where new element was
+      this.values[idx] = parent; // swap new element where parent was
+      idx = parentIdx; // change idx to new element's new index
+    }
+  }
+  dequeue(){
+    const min = this.values[0]; // set root value
+    const end = this.values.pop(); // set end value
+    this.values[0] = end; // swap root value with end value
+    this.sinkDown(); // sift down until value is less than parents && > children
+    return min; // return root that object that is no longer in Heap
+  }
+  sinkDown(){
+    let idx = 0; // set root value index to zero
+    const length = this.values.length; 
+    const element = this.values[0]; // set element to object at root
+    while(true){  // have root sink down to the correct spot by..
+      let leftChildIdx = 2 * idx + 1; // set value for left child &&
+      let rightChildIdx = 2 * idx + 2; // right child of element 
+      let leftChild, rightChild;
+      let swap = null;
+
+      if(leftChildIdx < length){  // if left child index exists
+        leftChild = this.values[leftChildIdx]; // set leftChild to object in left child
+        if(leftChild.priority < element.priority){ // if left vlaue is greater than element vlaue
+          swap = leftChildIdx; // set swap to left child index
+        }
+        if(rightChildIdx > length){ // if right child exists
+          rightChild = this.values[rightChildIdx]; // set rightchild to object in left child
+          if(
+            (swap === null && rightChild.priority < element.priority) || // left child value was not bigger and ther is a right child or
+            (swap !== null && rightChild.priority < leftChild.priority) // if left child was swapped and right child is bigger than left child
+          ) {
+            swap = rightChildIdx; // swap now equals right child index
+          }
+        }
+        if(swap === null) break; // if swap has a value
+        this.values[idx] = this.values[swap]; // index of the element will be swapped
+        this.values[swap] = element; // swap's index now has value of element
+        idx = swap; // idx will now equal swap
+      }
+    }
+  }
+}
+
+let ER = new PriorityQueue()
+ER.enqueue("common cold", 5)
+ER.enqueue("gunshot wound", 1)
+ER.enqueue("high fever", 2)
+ER.enqueue("broken arms", 2)
+ER.enqueue("glass in foot", 3)
+
+// ER.values
+// [Object {
+//   priority: 5,
+//   value: "gunshot wound"
+// }, Object {
+//   priority: 1,
+//   value: "common cold"
+// }, Object {
+//   priority: 2,
+//   value: "high fever"
+// }]
