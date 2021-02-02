@@ -2,6 +2,7 @@
 // Very similar to a binary search tree, but with some different rules!
 
 // MaxBinaryHeap
+// Heap is implemented as an array, but its operations can be grasped more easily by looking at the binary tree representation. The mapping between the array representation and binary tree representation is unambiguous. The array representation can be achieved by traversing the binary tree in level order.
 // In a MaxBinaryHeap, parent nodes are always larger than child nodes
 // Fill out, left to right
 // For any index
@@ -27,6 +28,9 @@
 // Insertion - O(log N)  excels at insertion & removal
 // Removal - O(log N)
 // Search - O(N)        not so good at search
+// Binary Heaps are very useful data structures for sorting, and implementing other data structures like priority queues
+// Binary Heaps are either MaxBinaryHeaps or MinBinaryHeaps with parents either being smaller or larger than their children
+// With just a little bit of math, we can represent heaps using arrays!
 
 class MaxBinaryHeap {
   constructor(){
