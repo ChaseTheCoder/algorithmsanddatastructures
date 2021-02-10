@@ -73,4 +73,24 @@ class Graph {
   addVertex(vertex){
     if(!this.adjacencyList[vertex]) this.adjacencyList[vertex] = [];
   }
-}  // we are building an undirected graph
+  addEdge(v1,v2){
+    this.adjacencyList[v1].push(v2);
+    this.adjacencyList
+  }
+  removeEdge(vertex1,vertex2){
+    this.adjacencyList[vertex1] = this.adjacencyList.filter( //*1
+      v => v !== vertex2 // filter where v is not equal to vertex2
+    )
+    this.adjacencyList[vertex2] = this.adjacencyList.filter(
+      v => v !== vertex1 // same but different
+    )
+  }
+  removeVertext(vertex){ // accepts vertex to remove
+    while(this.adjacencyList[vertex].length){ // loop as long as there are any other vertices in the adjacency list for the vertex
+      const adjacentVertex = this.adjacencyList[vertex].pop();
+      this.removeEdge(vertex, adjacentVertex); // call removeEdge with vertex we're removing and any values in the adjaency list for that vertex
+    }
+    delete this.adjacencyList[vertex] // delete the key in the adjacency list for that vertex
+  }
+}  // we are building an undirected graph 
+// *1 The filter() method creates a new array with all elements that pass the test implemented by the provided function.
